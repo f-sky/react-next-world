@@ -406,12 +406,12 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
             </div>
 
             {/* Image gallery */}
-            <div className="md:mt-8 lg:mt-0 lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-3">
+            <div className="mt-4 md:mt-8 lg:mt-0 lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-3">
               <h2 className="sr-only">Images</h2>
 
               <div>
-                <div className="art-collection">
-                  <div className="art-frame vertical overflow-hidden relative">
+                <div className="art-collection p-10">
+                  <div className="art-frame aspect-[18/24] overflow-hidden relative">
                     {/* change frame with border colors here */}
                     {isMarkerEnabled && (
                       <div className="marker-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -434,7 +434,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       title={title}
                       subtitle={subtitle}
                       width="354.5px"
-                      height="550px"
+                      height="1000px"
                       lng={lng}
                       lat={lat}
                       mapStyle={mapStyle}
