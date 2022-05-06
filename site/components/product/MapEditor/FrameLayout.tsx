@@ -48,7 +48,7 @@ export const DefaultFrame: FC<LayoutProps> = ({
   //   console.log(map, 'map')
 
   return (
-    <div className="mask-w">
+    <div className="mask-w h-full">
       <MapContainer
         zoom={13}
         center={[lat, lng]}
@@ -68,30 +68,6 @@ export const DefaultFrame: FC<LayoutProps> = ({
           url={`https://api.mapbox.com/styles/v1/jbedo/${mapStyle}/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamJlZG8iLCJhIjoiY2lrYm50dWR4MG03cHZqa3BycXE1dmw4dyJ9.v6Mp7vCiYGVe49UFjooYtQ`}
         />
 
-        <div
-          style={{ zIndex: 999 }}
-          className="relative z-50 h-full w-full text-center "
-        >
-          <div
-            style={{
-              background:
-                'linear-gradient(to bottom,rgba(255,255,255,0) 0,#fff 95%,#fff 50%)',
-            }}
-            className="p-5 absolute inset-x-0 bottom-0 h-17"
-          >
-            <h1
-              className={`${titleColor} text-4xl font-bold text-homemade`}
-            >
-              {title}
-            </h1>
-            <span
-              className={`${subtitleColor} text-black text-xl text-homemade`}
-            >
-              {subtitle}
-            </span>
-          </div>
-        </div>
-
         {/* <SVGOverlay
       attributes={{ stroke: "red" }}
       bounds={bounds}
@@ -107,6 +83,24 @@ export const DefaultFrame: FC<LayoutProps> = ({
   /> */}
         <MapCenter onMove={onMove} />
       </MapContainer>
+      <div
+        style={{
+          background:
+            'linear-gradient(to bottom,rgba(255,255,255,0) 0,#fff 95%,#fff 50%)',
+        }}
+        className="z-10 p-5 absolute inset-x-0 bottom-0 h-17 text-center"
+      >
+        <h1
+          className={`${titleColor} text-4xl font-bold text-homemade`}
+        >
+          {title}
+        </h1>
+        <span
+          className={`${subtitleColor} text-black text-xl text-homemade`}
+        >
+          {subtitle}
+        </span>
+      </div>
     </div>
   )
 }
