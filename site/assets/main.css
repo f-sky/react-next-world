@@ -74,6 +74,8 @@
 
 .leaflet-control {
   z-index: 800;
+  margin-top: 24px !important;
+  margin-left: 24px !important;
 }
 
 .circle-frame-overlay {

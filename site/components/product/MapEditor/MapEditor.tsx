@@ -76,6 +76,13 @@ const productData = {
       preview: 'circle.png',
     },
   ],
+  layouts: {
+    classic: {
+      gradientBackgroundColor: '#fff',
+    },
+    modern: {},
+    Square: {},
+  },
   colors: [
     {
       name: 'Heather Grey',
@@ -236,8 +243,10 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [status, setStatus] = useState('')
   const [mapStyle, setMapStyle] = useState('cjria9ya35nzu2smgxatsz5fp')
   const [frame, setFrameStyle] = useState(0)
+  const [layoutStyle, setLayoutStyle] = useState('')
   const [titleColor, setTitleColor] = useState('')
   const [subtitleColor, setSubtitleColor] = useState('')
+  const [gradientBackgroundColor, setGradientBackgroundColor] = useState(productData.layouts.classic.gradientBackgroundColor)
 
   const addItem = useAddItem()
   const { openSidebar } = useUI()
@@ -273,7 +282,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
           ssr: false, // This line is important. It's what prevents server-side render
         }
       ),
-    [lat, mapStyle, frame] // state that should refresh the map
+    [lat, mapStyle, frame, layoutStyle] // state that should refresh the map
   )
 
   const getUserLocation = () => {
@@ -439,8 +448,10 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       lat={lat}
                       mapStyle={mapStyle}
                       layout={frame}
+                      layoutStyle={layoutStyle}
                       titleColor={titleColor}
                       subtitleColor={subtitleColor}
+                      gradientBackgroundColor={gradientBackgroundColor}
                       onMove={onMove}
                       // onMove={onMove}
                       // eventually just pass in theme={theme} has all of the layouts
@@ -777,6 +788,39 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       </dd>
                     </Fragment>
                   ))} */}
+
+                    <h3 className="sr-only">Layout</h3>
+
+                    <div className="mt-4 prose prose-sm max-w-none text-gray-500">
+                      <div className="product-sidebar__heading">
+                        <h2 className="text-lg font-bold text-gray-900">
+                          Layout
+                        </h2>
+                        <p className="text-gray-400">
+                          Select layout
+                        </p>
+                      </div>
+                      <div className="my-7">
+                        <button
+                          type="button" 
+                          className={`mr-2.5 px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
+                            ${layoutStyle == "classic" && "outline-none ring-1 ring-indigo-500 border-indigo-500"}`}
+                          onClick={() => setLayoutStyle("classic")}
+                        >Classic</button>                        
+                        <button
+                          type="button" 
+                          className={`mr-2.5 px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
+                            ${layoutStyle == "modern" && "outline-none ring-1 ring-indigo-500 border-indigo-500"}`}
+                          onClick={() => setLayoutStyle("modern")}
+                        >Modern</button>
+                        <button
+                          type="button" 
+                          className={`px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
+                            ${layoutStyle == "square" && "outline-none ring-1 ring-indigo-500 border-indigo-500"}`}
+                          onClick={() => setLayoutStyle("square")}
+                        >Square</button>
+                      </div>
+                    </div>
                   </Tab.Panel>
 
                   <Tab.Panel>
