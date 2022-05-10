@@ -14,6 +14,7 @@ import {
 import 'leaflet/dist/leaflet.css'
 import MapCenter from './MapCenter';
 import Classic from '../MapLayout/Classic';
+import Modern from '../MapLayout/Modern';
 
 interface LayoutProps {
   title: string
@@ -98,6 +99,14 @@ export const DefaultFrame: FC<LayoutProps> = ({
           titleColor={titleColor}
           subtitleColor={subtitleColor}
           gradientBackgroundColor={gradientBackgroundColor}
+        />
+      }
+      { layoutStyle == "modern" && 
+        <Modern
+          title={title}
+          subtitle={subtitle}
+          titleColor={titleColor}
+          subtitleColor={subtitleColor}
         />
       }
     </div>
