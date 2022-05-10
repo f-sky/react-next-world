@@ -515,7 +515,7 @@ const Layout: React.FC<Props> = ({
           </Dialog>
         </Transition.Root>
 
-        <header className="relative overflow-hidden">
+        <header className="relative overflow-hidden shadow">
           <TopNav />
 
           {/* Hero section */}

@@ -255,7 +255,7 @@ const Nav: FC<NavProps> = ({ links }) => {
   return (
     <nav
       aria-label="Top"
-      className="relative z-20 bg-white bg-opacity-90 backdrop-filter backdrop-blur-xl"
+      className="relative z-20 bg-white bg-opacity-90 backdrop-filter backdrop-blur-xl shadow"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 flex items-center">
