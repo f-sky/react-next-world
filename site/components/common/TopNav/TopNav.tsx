@@ -46,7 +46,7 @@ const navigation = {
   categories: [
     {
       id: 'women',
-      name: 'Create A Map',
+      name: 'Our Products',
       featured: [
         {
           name: 'New Arrivals',
@@ -108,7 +108,7 @@ const navigation = {
     },
     {
       id: 'men',
-      name: 'Anniversary',
+      name: 'Gift Occasions',
       featured: [
         {
           name: 'New Arrivals',
@@ -167,8 +167,8 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Company', href: '#' },
-    { name: 'Stores', href: '#' },
+    { name: 'Our Story', href: '#' },
+    { name: 'Inspiration', href: '#' },
   ],
 }
 
@@ -427,7 +427,7 @@ const Nav: FC<NavProps> = ({ links }) => {
               </a>
             </div>
 
-            <div className="hidden lg:ml-8 lg:flex">
+            {/* <div className="hidden lg:ml-8 lg:flex">
               <a
                 href="#"
                 className="text-gray-700 hover:text-gray-800 flex items-center"
@@ -440,7 +440,7 @@ const Nav: FC<NavProps> = ({ links }) => {
                 <span className="ml-3 block text-sm font-medium">CAD</span>
                 <span className="sr-only">, change currency</span>
               </a>
-            </div>
+            </div> */}
 
             {/* Search */}
             <div className="flex lg:ml-6">
