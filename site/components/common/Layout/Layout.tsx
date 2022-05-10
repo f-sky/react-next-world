@@ -516,6 +516,9 @@ const Layout: React.FC<Props> = ({
         </Transition.Root>
 
         <header className="relative overflow-hidden shadow">
+        <p className="bg-gray-800 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          Get 20% OFF Your Second Poster
+        </p>
           <TopNav />
 
           {/* Hero section */}
