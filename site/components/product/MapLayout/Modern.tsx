@@ -16,17 +16,17 @@ const Modern = ({
       >
         <div className="inline-block px-4 pt-2.5 pb-2 md:px-8 md:pt-5 md:pb-3 bg-white">
           <h1
-            className={`${titleColor} text-xl md:text-4xl font-bold text-homemade`}
+            className={`${titleColor} text-xl md:text-4xl font-bold text-raleway`}
           >
             {title}
           </h1>
           <span
-            className={`${subtitleColor} block pt-2 md:pt-2.5 text-xs md:text-xl text-homemade`}
+            className={`${subtitleColor} block text-xs md:text-xl text-oswald`}
           >
             {subtitle}
           </span>
           <span
-            className="text-gray-400 block font-sans text-[10px] md:text-xs"
+            className="text-gray-400 block text-raleway text-[10px] md:text-xs"
           >
             48.8014°N / 2.4554°E
           </span>

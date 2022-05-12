@@ -187,8 +187,8 @@ const productData = {
           mapPreview: 'map-style-pink.png',
           titleColor: 'text-black-400',
           subtitleColor: 'text-gray-400',
-          titleFont: 'text-rocksalt',
-          subtitleFont: 'text-homemade',
+          titleFont: 'text-montserrat',
+          subtitleFont: 'text-oswald',
         },
         circle: {
           bgColor: 'bg-gray-400',
@@ -428,10 +428,10 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
           <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
             <div className="lg:col-start-8 lg:col-span-5">
               <div className="flex justify-between">
-                <h1 className="text-xl font font-medium text-gray-900">
+                <h1 className="text-3xl font font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                   {product.name}
                 </h1>
-                <p className="text-xl font-medium text-gray-900">{price}</p>
+                <p className="text-xl font font-extrabold tracking-tight text-gray-900 sm:text-xl">{price}</p>
               </div>
               {/* Reviews */}
               <div className="mt-4">
@@ -464,7 +464,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                   <div className="ml-4 flex">
                     <a
                       href="#"
-                      className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      className="text-sm font-medium text-gray-600 hover:text-gray-500"
                     >
                       See all {productData.reviewCount} reviews
                     </a>

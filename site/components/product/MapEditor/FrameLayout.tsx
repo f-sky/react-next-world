@@ -12,8 +12,8 @@ import {
   useMap,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
-import MapCenter from './MapCenter';
-import { Classic, Modern, Square } from '../MapLayout';
+import MapCenter from './MapCenter'
+import { Classic, Modern, Square } from '../MapLayout'
 
 interface LayoutProps {
   title: string
@@ -41,7 +41,7 @@ export const DefaultFrame: FC<LayoutProps> = ({
   subtitle,
   subtitleColor,
   gradientBackgroundColor,
-  onMove
+  onMove,
 }) => {
   // const [map, setMap] = useState(null);
 
@@ -74,7 +74,7 @@ export const DefaultFrame: FC<LayoutProps> = ({
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/jbedo/${mapStyle}/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamJlZG8iLCJhIjoiY2lrYm50dWR4MG03cHZqa3BycXE1dmw4dyJ9.v6Mp7vCiYGVe49UFjooYtQ`}
         />
-        <ZoomControl position="topleft" />        
+        <ZoomControl position="topleft" />
 
         {/* <SVGOverlay
       attributes={{ stroke: "red" }}
@@ -91,7 +91,7 @@ export const DefaultFrame: FC<LayoutProps> = ({
   /> */}
         <MapCenter onMove={onMove} />
       </MapContainer>
-      { layoutStyle == "classic" && 
+      {layoutStyle == 'classic' && (
         <Classic
           title={title}
           subtitle={subtitle}
@@ -99,22 +99,18 @@ export const DefaultFrame: FC<LayoutProps> = ({
           subtitleColor={subtitleColor}
           gradientBackgroundColor={gradientBackgroundColor}
         />
-      }
-      { layoutStyle == "modern" && 
+      )}
+      {layoutStyle == 'modern' && (
         <Modern
           title={title}
           subtitle={subtitle}
           titleColor={titleColor}
           subtitleColor={subtitleColor}
         />
-      }
-      { layoutStyle == "square" && 
-        <Square
-          title={title}
-          subtitle={subtitle}
-          titleColor={titleColor}
-        />
-      }
+      )}
+      {layoutStyle == 'square' && (
+        <Square title={title} subtitle={subtitle} titleColor={titleColor} />
+      )}
     </div>
   )
 }
@@ -158,21 +154,18 @@ export const CircleFrame: FC<LayoutProps> = ({
               zIndex: 200,
               background:
                 'linear-gradient(to bottom,rgba(255,255,255,0) 0,#fff 95%,#fff 50%)',
-            }}fp
+            }}
+            fp
             className="p-5 absolute inset-x-0 bottom-0 h-17"
           >
-            <h1
-              className={`${titleColor} text-4xl font-bold text-rocksalt`}
-            >
+            <h1 className={`${titleColor} text-4xl font-bold text-rocksalt`}>
               {title}
             </h1>
-            <span
-              className={`${subtitleColor} text-xl text-homemade`}
-            >
+            <span className={`${subtitleColor} text-xl text-homemade`}>
               {subtitle}
             </span>
           </div>
-          <div style={{zIndex: 100 }} className="circle-frame-overlay"></div>
+          <div style={{ zIndex: 100 }} className="circle-frame-overlay"></div>
         </div>
 
         {/* <SVGOverlay

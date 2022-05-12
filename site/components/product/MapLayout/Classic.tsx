@@ -18,10 +18,10 @@ const Classic = ({
           background:
             `linear-gradient(to bottom,rgba(255,255,255,0) 0,${gradientBackgroundColor} 95%,${gradientBackgroundColor} 50%)`,
         }}
-        className="z-10 p-5 absolute inset-x-0 bottom-0 h-17 text-center"
+        className="z-10 py-10 absolute inset-x-0 bottom-0 h-17 text-center"
       >
         <h1
-          className={`${titleColor} text-xl md:text-4xl font-bold text-homemade`}
+          className={`${titleColor} text-xl md:text-4xl font-bold text-montserrat`}
         >
           {title}
         </h1>
