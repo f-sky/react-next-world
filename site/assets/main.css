@@ -15,7 +15,7 @@
   border-top-color: #ddd;
 }
 
-.art-frame {
+.editor-wrapper {
   border: 25px solid #303030;
   box-sizing: border-box;
   display: block;
@@ -38,7 +38,7 @@
     0px 0px 13px 0px rgba(0, 0, 0, 1), 0px 26px 70px 0px rgba(0, 0, 0, 0.1);
 }
 
-.art-collection {
+.editor {
   box-sizing: border-box;
   display: block;
   /* margin:100px; */
@@ -102,7 +102,7 @@
   .vertical {
     transform: scale(0.8);
   }
-  .art-frame {
+  . {
     border: 15px solid #303030;
   }
 }
