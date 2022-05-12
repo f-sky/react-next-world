@@ -76,6 +76,13 @@ const productData = {
       preview: 'circle.png',
     },
   ],
+  layouts: {
+    classic: {
+      gradientBackgroundColor: '#fff',
+    },
+    modern: {},
+    Square: {},
+  },
   colors: [
     {
       name: 'Heather Grey',
@@ -236,8 +243,12 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [status, setStatus] = useState('')
   const [mapStyle, setMapStyle] = useState('cjria9ya35nzu2smgxatsz5fp')
   const [frame, setFrameStyle] = useState(0)
+  const [layoutStyle, setLayoutStyle] = useState('')
   const [titleColor, setTitleColor] = useState('')
   const [subtitleColor, setSubtitleColor] = useState('')
+  const [gradientBackgroundColor, setGradientBackgroundColor] = useState(
+    productData.layouts.classic.gradientBackgroundColor
+  )
 
   const addItem = useAddItem()
   const { openSidebar } = useUI()
@@ -273,7 +284,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
           ssr: false, // This line is important. It's what prevents server-side render
         }
       ),
-    [lat, mapStyle, frame] // state that should refresh the map
+    [lat, mapStyle, frame, layoutStyle] // state that should refresh the map
   )
 
   const getUserLocation = () => {
@@ -315,7 +326,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   return (
     <div className="bg-white">
       <div className="pt-6 pb-16 sm:pb-24">
-        <nav
+        {/* <nav
           aria-label="Breadcrumb"
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         >
@@ -353,17 +364,18 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
               </a>
             </li>
           </ol>
-        </nav>
-        <div id="art-frame" className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+        </nav> */}
+        <div
+          id="art-frame"
+          className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+        >
           <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
             <div className="lg:col-start-8 lg:col-span-5">
               <div className="flex justify-between">
-                <h1 className="text-xl font-medium text-gray-900">
-                  {productData.name}
+                <h1 className="text-xl font font-medium text-gray-900">
+                  {product.name}
                 </h1>
-                <p className="text-xl font-medium text-gray-900">
-                  {productData.price}
-                </p>
+                <p className="text-xl font-medium text-gray-900">{price}</p>
               </div>
               {/* Reviews */}
               <div className="mt-4">
@@ -410,8 +422,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
               <h2 className="sr-only">Images</h2>
 
               <div>
-                <div className="art-collection p-10">
-                  <div className="art-frame aspect-[18/24] overflow-hidden relative">
+                <div className="editor px-10 pb-10">
+                  <div className="editor-wrapper aspect-[18/24] overflow-hidden relative">
                     {/* change frame with border colors here */}
                     {isMarkerEnabled && (
                       <div className="marker-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -439,8 +451,10 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       lat={lat}
                       mapStyle={mapStyle}
                       layout={frame}
+                      layoutStyle={layoutStyle}
                       titleColor={titleColor}
                       subtitleColor={subtitleColor}
+                      gradientBackgroundColor={gradientBackgroundColor}
                       onMove={onMove}
                       // onMove={onMove}
                       // eventually just pass in theme={theme} has all of the layouts
@@ -665,7 +679,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                         </p>
                       </div>
                       {/* Color picker */}
-                      <div className="my-7">
+                      {/* <div className="my-7">
                         <h2 className="text-sm font-medium text-gray-900">
                           Frame Style
                         </h2>
@@ -712,6 +726,45 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                             ))}
                           </div>
                         </RadioGroup>
+                      </div> */}
+                      <h3 className="sr-only">Layout</h3>
+
+                      <div className="mt-4 prose prose-sm max-w-none text-gray-500">
+                        <div className="my-7">
+                          <button
+                            type="button"
+                            className={`mr-2.5 px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
+        ${
+          layoutStyle == 'classic' &&
+          'outline-none ring-1 ring-indigo-500 border-indigo-500'
+        }`}
+                            onClick={() => setLayoutStyle('classic')}
+                          >
+                            Classic
+                          </button>
+                          <button
+                            type="button"
+                            className={`mr-2.5 px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
+        ${
+          layoutStyle == 'modern' &&
+          'outline-none ring-1 ring-indigo-500 border-indigo-500'
+        }`}
+                            onClick={() => setLayoutStyle('modern')}
+                          >
+                            Modern
+                          </button>
+                          <button
+                            type="button"
+                            className={`px-4 py-2 border border-gray-300 text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500
+        ${
+          layoutStyle == 'square' &&
+          'outline-none ring-1 ring-indigo-500 border-indigo-500'
+        }`}
+                            onClick={() => setLayoutStyle('square')}
+                          >
+                            Square
+                          </button>
+                        </div>
                       </div>
 
                       {/* Color picker */}
@@ -835,7 +888,6 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
               </Tab.Group>
 
               <form>
-
                 <div className="z-10 mt-8">
                   {/* Size picker */}
                   {/* <div className="mt-8">

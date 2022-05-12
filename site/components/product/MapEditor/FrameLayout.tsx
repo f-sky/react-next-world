@@ -7,11 +7,13 @@ import {
   Marker,
   Popup,
   TileLayer,
+  ZoomControl,
   Circle,
   useMap,
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import MapCenter from './MapCenter';
+import { Classic, Modern, Square } from '../MapLayout';
 
 interface LayoutProps {
   title: string
@@ -23,6 +25,8 @@ interface LayoutProps {
   lat: number
   lng: number
   layout: number
+  layoutStyle: string
+  gradientBackgroundColor: string
   onMove?(coords: [number, number], zoom: number): any
 }
 
@@ -31,10 +35,12 @@ export const DefaultFrame: FC<LayoutProps> = ({
   lng,
   height,
   mapStyle,
+  layoutStyle,
   title,
   titleColor,
   subtitle,
   subtitleColor,
+  gradientBackgroundColor,
   onMove
 }) => {
   // const [map, setMap] = useState(null);
@@ -51,6 +57,7 @@ export const DefaultFrame: FC<LayoutProps> = ({
     <div className="mask-w h-full">
       <MapContainer
         zoom={13}
+        zoomControl={false}
         center={[lat, lng]}
         scrollWheelZoom={false}
         // ref={setMap}
@@ -67,6 +74,7 @@ export const DefaultFrame: FC<LayoutProps> = ({
         <TileLayer
           url={`https://api.mapbox.com/styles/v1/jbedo/${mapStyle}/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiamJlZG8iLCJhIjoiY2lrYm50dWR4MG03cHZqa3BycXE1dmw4dyJ9.v6Mp7vCiYGVe49UFjooYtQ`}
         />
+        <ZoomControl position="topleft" />        
 
         {/* <SVGOverlay
       attributes={{ stroke: "red" }}
@@ -83,24 +91,30 @@ export const DefaultFrame: FC<LayoutProps> = ({
   /> */}
         <MapCenter onMove={onMove} />
       </MapContainer>
-      <div
-        style={{
-          background:
-            'linear-gradient(to bottom,rgba(255,255,255,0) 0,#fff 95%,#fff 50%)',
-        }}
-        className="z-10 p-5 absolute inset-x-0 bottom-0 h-17 text-center"
-      >
-        <h1
-          className={`${titleColor} text-4xl font-bold text-homemade`}
-        >
-          {title}
-        </h1>
-        <span
-          className={`${subtitleColor} text-black text-xl text-homemade`}
-        >
-          {subtitle}
-        </span>
-      </div>
+      { layoutStyle == "classic" && 
+        <Classic
+          title={title}
+          subtitle={subtitle}
+          titleColor={titleColor}
+          subtitleColor={subtitleColor}
+          gradientBackgroundColor={gradientBackgroundColor}
+        />
+      }
+      { layoutStyle == "modern" && 
+        <Modern
+          title={title}
+          subtitle={subtitle}
+          titleColor={titleColor}
+          subtitleColor={subtitleColor}
+        />
+      }
+      { layoutStyle == "square" && 
+        <Square
+          title={title}
+          subtitle={subtitle}
+          titleColor={titleColor}
+        />
+      }
     </div>
   )
 }

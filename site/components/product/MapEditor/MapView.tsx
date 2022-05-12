@@ -10,8 +10,10 @@ interface MapViewProps {
   lat: number
   lng: number
   layout: number
+  layoutStyle: string
   titleColor: string
   subtitleColor: string
+  gradientBackgroundColor: string
   onMove?(coords: any, zoom: any): any
 }
 

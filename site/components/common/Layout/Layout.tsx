@@ -515,16 +515,19 @@ const Layout: React.FC<Props> = ({
           </Dialog>
         </Transition.Root>
 
-        <header className="relative overflow-hidden">
+        <header className="relative overflow-hidden shadow">
+        <p className="bg-gray-800 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+          Get 20% OFF Your Second Poster
+        </p>
           <TopNav />
 
           {/* Hero section */}
           {pathname === '/' && (
-            <div className="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
+            <div className="pt-10 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:static">
                 <div className="sm:max-w-lg">
                   <h1 className="text-4xl font font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-                    Create A Custom Map Art Print
+                    Create Your Own Personalized Map Art Print
                   </h1>
                   <p className="mt-4 text-xl text-gray-500">
                     This year, our new summer collection will shelter you from
@@ -539,7 +542,7 @@ const Layout: React.FC<Props> = ({
                       aria-hidden="true"
                       className="pointer-events-none lg:absolute lg:inset-y-0 lg:max-w-7xl lg:mx-auto lg:w-full"
                     >
-                      <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+                      <div className="mt-28 md:mt-10 absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
                         <div className="flex items-center space-x-6 lg:space-x-8">
                           <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
                             <div className="w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100">
@@ -602,10 +605,11 @@ const Layout: React.FC<Props> = ({
 
                     <a
                       href="/product/create-a-map"
-                      className="inline-block text-center bg-indigo-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700"
+                      className="block sm:inline-block text-center bg-gray-800 border border-transparent rounded-md py-3 px-8 font-medium text-lg text-white hover:bg-gray-700"
                     >
-                      Start Creating - Create Your Map
+                      Start Designing
                     </a>
+                    <p className="text-sm text-center md:text-left text-gray-500 py-4">100% Satisfaction Guaranteed</p>
                   </div>
                 </div>
               </div>
