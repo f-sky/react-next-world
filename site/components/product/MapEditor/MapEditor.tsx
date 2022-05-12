@@ -478,7 +478,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
               <h2 className="sr-only">Images</h2>
 
               <div>
-                <div className="editor px-10 pb-10 pt-10 md:pt-0">
+                <div className="editor py-4 md:pt-0 md:pb-10">
                   <div className="editor-wrapper aspect-[18/24] overflow-hidden relative">
                     {/* change frame with border colors here */}
                     {isMarkerEnabled && (
