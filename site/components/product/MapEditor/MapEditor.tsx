@@ -1,4 +1,6 @@
 import { FC, useEffect } from 'react'
+import { TiCompass, TiBrush } from 'react-icons/ti';
+import { RiInputMethodLine, RiDragDropFill } from 'react-icons/ri';
 import { HeartIcon, LocationMarkerIcon } from '@heroicons/react/solid'
 import type { Product } from '@commerce/types/product'
 import { ProductOptions } from '@components/product'
@@ -30,6 +32,60 @@ import {
   selectDefaultOptionFromProduct,
   SelectedOptions,
 } from '../helpers'
+
+const features2 = [
+  {
+    name: 'Minimal and thoughtful',
+    description:
+      'Our laptop sleeve is compact and precisely fits 13" devices. The zipper allows you to access the interior with ease, and the front pouch provides a convenient place for your charger cable.',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-01.jpg',
+    imageAlt: 'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
+  },
+  {
+    name: 'Refined details',
+    description:
+      'We design every detail with the best materials and finishes. This laptop sleeve features durable canvas with double-stitched construction, a felt interior, and a high quality zipper that hold up to daily use.',
+    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-02.jpg',
+    imageAlt: 'Detail of zipper pull with tan leather and silver rivet.',
+  },
+]
+
+const features = [
+  {
+    name: 'Three card types',
+    description:
+      'Today, Next, and Someday cards allow you to defer your dreams into the future.',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-01.jpg',
+    imageAlt: 'Green cardstock box containing white, beige, and brown cards.',
+  },
+  {
+    name: 'The perfect mix',
+    description:
+      'Each refill pack contains plenty of cards to last you a month of procrastination.',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-02.jpg',
+    imageAlt: 'Green cardstock box open with 50 cards inside.',
+  },
+  {
+    name: 'Dot grid backs',
+    description:
+      'Flip a card over to doodle during meetings when you should be listening.',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-03.jpg',
+    imageAlt:
+      'Detail of white today card, beige next card, and brown someday card with dot grid.',
+  },
+  {
+    name: 'Refill packs',
+    description:
+      'Subscribe and save on routine refill packs to keep you productive all year long.',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-04.jpg',
+    imageAlt:
+      'Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.',
+  },
+]
 
 const productData = {
   name: 'Custom City Framed Poster',
@@ -325,7 +381,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
 
   return (
     <div className="bg-white">
-      <div className="pt-6 pb-16 sm:pb-24">
+      <div className="pt-6 pb-16 sm:pb-2">
         {/* <nav
           aria-label="Breadcrumb"
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -367,7 +423,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
         </nav> */}
         <div
           id="art-frame"
-          className="mt-8 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+          className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
             <div className="lg:col-start-8 lg:col-span-5">
@@ -422,7 +478,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
               <h2 className="sr-only">Images</h2>
 
               <div>
-                <div className="editor px-10 pb-10">
+                <div className="editor px-10 pb-10 pt-10 md:pt-0">
                   <div className="editor-wrapper aspect-[18/24] overflow-hidden relative">
                     {/* change frame with border colors here */}
                     {isMarkerEnabled && (
@@ -508,7 +564,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                         )
                       }
                     >
-                      <StarIcon className="h-6 w-6 text-gray-500 inline mr-2" />
+                      {/* <StarIcon className="h-6 w-6 text-gray-500 inline mr-2" /> */}
+                      <TiCompass className="h-6 w-6 inline text-gray-800 mr-2" />
                       Location
                     </Tab>
                     <Tab
@@ -521,7 +578,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                         )
                       }
                     >
-                      <PhotographIcon className="h-6 w-6 text-gray-500 inline mr-2" />
+                      <TiBrush className="h-6 w-6 text-gray-500 inline mr-2" />
                       Design
                     </Tab>
                     <Tab
@@ -534,7 +591,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                         )
                       }
                     >
-                      <DocumentTextIcon className="h-6 w-6 text-gray-500 inline mr-2" />
+                      <RiInputMethodLine className="h-6 w-6 inline text-gray-800 mr-2" />
                       Text
                     </Tab>
                     <Tab
@@ -547,7 +604,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                         )
                       }
                     >
-                      <DuplicateIcon className="h-6 w-6 text-gray-500 inline mr-2" />
+                      <RiDragDropFill className="h-6 w-6 text-gray-500 inline mr-2" />
                       Format
                     </Tab>
                   </Tab.List>
@@ -983,53 +1040,103 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
 
                 <div
                   className="mt-4 prose prose-sm text-gray-500"
-                  dangerouslySetInnerHTML={{ __html: productData.description }}
+                  dangerouslySetInnerHTML={{ __html: product.description }}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-              <div className="mt-8 border-t border-gray-200 pt-8">
-                <h2 className="text-sm font-medium text-gray-900">
-                  Fabric &amp; Care
-                </h2>
+      <div className="bg-gray-50">
+        <div className="max-w-2xl mx-auto py-14 px-4 sm:py-32 sm:px-6 lg:max-w-7xl lg:px-8">
+          <div className="max-w-3xl">
+            <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              How It Works
+            </p>
+            <p className="mt-4 text-gray-500">
+              Focus allows you to plan 10 daily tasks, while also thinking ahead
+              about what's next. Forget distracting digital apps and embrace
+              these small, sturdy pieces of paper.
+            </p>
+          </div>
 
-                <div className="mt-4 prose prose-sm text-gray-500">
-                  <ul role="list">
-                    {productData.details.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
+          <div className="mt-11 grid items-start grid-cols-1 gap-y-16 gap-x-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+            {features.map((feature) => (
+              <div key={feature.name} className="flex flex-col-reverse">
+                <div className="mt-6">
+                  <h3 className="text-sm font-medium text-gray-900">
+                    {feature.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500">
+                    {feature.description}
+                  </p>
+                </div>
+                <div className="aspect-w-1 aspect-h-1 rounded-lg bg-gray-100 overflow-hidden">
+                  <img
+                    src={feature.imageSrc}
+                    alt={feature.imageAlt}
+                    className="object-center object-cover"
+                  />
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-              {/* Policies */}
-              <section aria-labelledby="policies-heading" className="mt-10">
-                <h2 id="policies-heading" className="sr-only">
-                  Our Policies
-                </h2>
+      <div className="bg-white">
+        <div className="max-w-2xl mx-auto py-24 px-4 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              Our Guarantee
+            </h2>
+            <p className="mt-4 text-gray-500">
+              As a digital creative, your laptop or tablet is at the center of
+              your work. Keep your device safe with a fabric sleeve that matches
+              in quality and looks.
+            </p>
+          </div>
 
-                <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-                  {policies.map((policy) => (
-                    <div
-                      key={policy.name}
-                      className="bg-gray-50 border border-gray-200 rounded-lg p-6 text-center"
-                    >
-                      <dt>
-                        <policy.icon
-                          className="mx-auto h-6 w-6 flex-shrink-0 text-gray-400"
-                          aria-hidden="true"
-                        />
-                        <span className="mt-4 text-sm font-medium text-gray-900">
-                          {policy.name}
-                        </span>
-                      </dt>
-                      <dd className="mt-1 text-sm text-gray-500">
-                        {policy.description}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
-            </div>
+          <div className="mt-16 space-y-16">
+            {features2.map((feature, featureIdx) => (
+              <div
+                key={feature.name}
+                className="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:gap-x-8 lg:items-center"
+              >
+                <div
+                  className={classNames(
+                    featureIdx % 2 === 0
+                      ? 'lg:col-start-1'
+                      : 'lg:col-start-8 xl:col-start-9',
+                    'mt-6 lg:mt-0 lg:row-start-1 lg:col-span-5 xl:col-span-4'
+                  )}
+                >
+                  <h3 className="text-lg font-medium text-gray-900">
+                    {feature.name}
+                  </h3>
+                  <p className="mt-2 text-sm text-gray-500">
+                    {feature.description}
+                  </p>
+                </div>
+                <div
+                  className={classNames(
+                    featureIdx % 2 === 0
+                      ? 'lg:col-start-6 xl:col-start-5'
+                      : 'lg:col-start-1',
+                    'flex-auto lg:row-start-1 lg:col-span-7 xl:col-span-8'
+                  )}
+                >
+                  <div className="aspect-w-5 aspect-h-2 rounded-lg bg-gray-100 overflow-hidden">
+                    <img
+                      src={feature.imageSrc}
+                      alt={feature.imageAlt}
+                      className="object-center object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
