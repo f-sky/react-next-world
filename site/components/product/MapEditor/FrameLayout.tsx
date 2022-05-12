@@ -13,8 +13,7 @@ import {
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import MapCenter from './MapCenter';
-import Classic from '../MapLayout/Classic';
-import Modern from '../MapLayout/Modern';
+import { Classic, Modern, Square } from '../MapLayout';
 
 interface LayoutProps {
   title: string
@@ -107,6 +106,13 @@ export const DefaultFrame: FC<LayoutProps> = ({
           subtitle={subtitle}
           titleColor={titleColor}
           subtitleColor={subtitleColor}
+        />
+      }
+      { layoutStyle == "square" && 
+        <Square
+          title={title}
+          subtitle={subtitle}
+          titleColor={titleColor}
         />
       }
     </div>
