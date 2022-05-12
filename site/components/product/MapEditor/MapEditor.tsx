@@ -434,7 +434,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       title={title}
                       subtitle={subtitle}
                       width="354.5px"
-                      height="1000px"
+                      height="320px"
                       lng={lng}
                       lat={lat}
                       mapStyle={mapStyle}
