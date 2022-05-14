@@ -57,6 +57,7 @@ const UserNav: React.FC<{
             </Button>
           </li>
         )}
+{/* 
         {process.env.COMMERCE_WISHLIST_ENABLED && (
           <li className={s.item}>
             <Link href="/wishlist">
@@ -82,6 +83,7 @@ const UserNav: React.FC<{
             </Dropdown>
           </li>
         )}
+         */}
         <li className={s.mobileMenu}>
           <Button
             className={s.item}
@@ -92,7 +94,6 @@ const UserNav: React.FC<{
               setSidebarView('MOBILE_MENU_VIEW')
             }}
           >
-            <Menu />
           </Button>
         </li>
       </ul>
