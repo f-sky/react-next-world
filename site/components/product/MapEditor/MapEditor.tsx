@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { FC, useEffect } from 'react'
 import { TiCompass, TiBrush } from 'react-icons/ti'
 import { RiInputMethodLine, RiDragDropFill } from 'react-icons/ri'
@@ -335,7 +336,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
 
   const variant = getProductVariant(product, selectedOptions)
   const addToCart = async () => {
-    let node = document.getElementById('editor-wrapper')
+    let node = document.getElementById('editor-wrapper');
     let controls = document.getElementsByClassName('leaflet-control-container')
 
     setLoading(true)
