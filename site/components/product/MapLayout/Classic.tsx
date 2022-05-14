@@ -21,12 +21,12 @@ const Classic = ({
         className="z-10 py-10 pt-20 absolute inset-x-0 bottom-0 h-17 text-center"
       >
         <h1
-          className={`${titleColor} text-2xl md:text-5xl font-bold text-montserrat modern-title`}
+          className={`${titleColor} text-3xl md:text-5xl font-bold text-montserrat modern-title`}
         >
           {title}
         </h1>
         <span
-          className={`${subtitleColor} block pb-2.5 pt-2.5 text-xs md:text-xl text-homemade`}
+          className={`${subtitleColor} block pb-2.5 pt-1 text-sm md:text-xl text-homemade`}
         >
           {subtitle}
         </span>

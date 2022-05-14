@@ -16,7 +16,8 @@
 }
 
 .editor-wrapper {
-  border: 25px solid #303030;
+  border-width: 1.5em;
+  border-color: #303030;
   box-sizing: border-box;
   display: block;
   background-image: linear-gradient(
@@ -104,6 +105,9 @@
   }
   . {
     border: 15px solid #303030;
+  }
+  .editor-wrapper {
+    border-width: .6em;
   }
 }
 
