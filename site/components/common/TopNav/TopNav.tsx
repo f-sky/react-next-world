@@ -443,13 +443,13 @@ const Nav: FC<NavProps> = ({ links }) => {
             </div> */}
 
             {/* Search */}
-            <div className="flex lg:ml-6">
+            {/* <div className="flex lg:ml-6">
               <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
                 <span className="sr-only">Search</span>
                 <SearchIcon className="w-6 h-6" aria-hidden="true" />
               </a>
             </div>
-
+ */}
             {/* Cart */}
             <div className="ml-4 flow-root lg:ml-6">
               <a href="/cart" className="group -m-2 p-2 flex items-center">
@@ -458,7 +458,7 @@ const Nav: FC<NavProps> = ({ links }) => {
                   aria-hidden="true"
                 />
                 {itemsCount > 0 && (
-                  <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
+                  <span className="ml-2 text-md pt-1 text-montserrat font-medium text-gray-700 group-hover:text-gray-800">
                     {itemsCount}
                   </span>
                 )}

@@ -17,7 +17,8 @@ import { MenuSidebarView } from '@components/common/UserNav'
 import type { Page } from '@commerce/types/page'
 import type { Category } from '@commerce/types/site'
 import type { Link as LinkProps } from '../UserNav/MenuSidebarView'
-import TopNav from '@components/common/TopNav';
+import TopNav from '@components/common/TopNav'
+import { HiHeart } from 'react-icons/hi'
 
 /*
   This example requires Tailwind CSS v2.0+ 
@@ -516,9 +517,10 @@ const Layout: React.FC<Props> = ({
         </Transition.Root>
 
         <header className="relative overflow-hidden shadow">
-        <p className="bg-gray-800 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
-          Get 20% OFF Your Second Poster
-        </p>
+          <p className="bg-gray-800 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">
+            <HiHeart className="h-6 w-6 text-white mr-2" aria-hidden="true" />
+            Free Worldwide Shipping
+          </p>
           <TopNav />
 
           {/* Hero section */}
@@ -609,7 +611,9 @@ const Layout: React.FC<Props> = ({
                     >
                       Start Designing
                     </a>
-                    <p className="text-sm text-center md:text-left text-gray-500 py-4">100% Satisfaction Guaranteed</p>
+                    <p className="text-sm text-center md:text-left text-gray-500 py-4">
+                      100% Satisfaction Guaranteed
+                    </p>
                   </div>
                 </div>
               </div>
