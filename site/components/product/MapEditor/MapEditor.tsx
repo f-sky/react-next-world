@@ -54,7 +54,7 @@ const features2 = [
 
 const features = [
   {
-    name: 'Three card types',
+    name: 'Design Your Own Personalized Map Poster',
     description:
       'Today, Next, and Someday cards allow you to defer your dreams into the future.',
     imageSrc:
@@ -62,7 +62,7 @@ const features = [
     imageAlt: 'Green cardstock box containing white, beige, and brown cards.',
   },
   {
-    name: 'The perfect mix',
+    name: 'Printed Locally & Shipped',
     description:
       'Each refill pack contains plenty of cards to last you a month of procrastination.',
     imageSrc:
@@ -70,7 +70,7 @@ const features = [
     imageAlt: 'Green cardstock box open with 50 cards inside.',
   },
   {
-    name: 'Dot grid backs',
+    name: 'Hang & Enjoy!',
     description:
       'Flip a card over to doodle during meetings when you should be listening.',
     imageSrc:
@@ -78,15 +78,15 @@ const features = [
     imageAlt:
       'Detail of white today card, beige next card, and brown someday card with dot grid.',
   },
-  {
-    name: 'Refill packs',
-    description:
-      'Subscribe and save on routine refill packs to keep you productive all year long.',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-04.jpg',
-    imageAlt:
-      'Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.',
-  },
+  // {
+  //   name: 'Refill packs',
+  //   description:
+  //     'Subscribe and save on routine refill packs to keep you productive all year long.',
+  //   imageSrc:
+  //     'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-04.jpg',
+  //   imageAlt:
+  //     'Stack of three green cardstock boxes with 3 hole cutouts showing cards inside.',
+  // },
 ]
 
 const productData = {
@@ -300,6 +300,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [subtitle, setSubtitle] = useState('United States')
   const [status, setStatus] = useState('')
   const [mapStyle, setMapStyle] = useState('cl2nobx08001h14qotlg1madp')
+  // no labels: cl35mcs9j002n16pjuyantjr6
   const [frame, setFrameStyle] = useState(0)
   const [layoutStyle, setLayoutStyle] = useState('classic')
   const [titleColor, setTitleColor] = useState('')
@@ -898,6 +899,37 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           </div>
                         </RadioGroup>
                       </div>
+
+                      <div className="mt-2 relative flex items-start">
+                          <div className="flex items-center h-5">
+                            <input
+                              id="map-labels"
+                              aria-describedby="comments-description"
+                              name="comments"
+                              type="checkbox"
+                              // checked={false}
+                              onChange={(ev) =>
+                                // setMarkerEnabled(!isMarkerEnabled)
+                                console.log('test')
+                              }
+                              className="focus:ring-gray-500 h-4 w-4 text-black border-gray-300 rounded"
+                            />
+                          </div>
+                          <div className="ml-3 text-sm">
+                            <label
+                              htmlFor="map-labels"
+                              className="font-medium text-gray-700"
+                            >
+                              Turn on Map Labels
+                            </label>
+                            <span
+                              className="text-gray-500"
+                            >
+                              <span className="sr-only">  Turn on Map Labels </span> -
+                              show street, city, and other labels
+                            </span>
+                          </div>
+                        </div>
                     </div>
                     {/* {faqs.map((faq) => (
                     <Fragment key={faq.question}>
@@ -1087,11 +1119,11 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
             <p className="mt-2 text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               How It Works
             </p>
-            <p className="mt-4 text-gray-500">
+            {/* <p className="mt-4 text-gray-500">
               Focus allows you to plan 10 daily tasks, while also thinking ahead
               about what's next. Forget distracting digital apps and embrace
               these small, sturdy pieces of paper.
-            </p>
+            </p> */}
           </div>
 
           <div className="mt-11 grid items-start grid-cols-1 gap-y-16 gap-x-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
