@@ -16,17 +16,17 @@ const Classic = ({
       <div
         style={{
           background:
-            `linear-gradient(to bottom,rgba(255,255,255,0) 0,${gradientBackgroundColor} 95%,${gradientBackgroundColor} 50%)`,
+            `linear-gradient(to bottom,rgba(255,255,255,0) 0,${gradientBackgroundColor} 45%,${gradientBackgroundColor} 50%)`,
         }}
-        className="z-10 py-10 absolute inset-x-0 bottom-0 h-17 text-center"
+        className="z-10 py-10 pt-20 absolute inset-x-0 bottom-0 h-17 text-center"
       >
         <h1
-          className={`${titleColor} text-xl md:text-4xl font-bold text-montserrat`}
+          className={`${titleColor} text-2xl md:text-5xl font-bold text-montserrat modern-title`}
         >
           {title}
         </h1>
         <span
-          className={`${subtitleColor} block pb-2.5 text-xs md:text-xl text-homemade`}
+          className={`${subtitleColor} block pb-2.5 pt-2.5 text-xs md:text-xl text-homemade`}
         >
           {subtitle}
         </span>

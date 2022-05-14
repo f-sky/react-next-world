@@ -125,3 +125,13 @@
 .text-raleway {
   font-family: 'Raleway', sans-serif;
 }
+/* .modern-title:before {
+  content: "";
+  display: block;
+  width: 3em;
+  position: absolute;
+  top: calc(50% - 0.07em);
+  background-color: #000;
+  height: 0.14em;
+  left: 0;
+} */

@@ -12,16 +12,16 @@ const Modern = ({
   return (
     <>
       <div
-        className="z-10 p-2.5 md:p-5 absolute inset-x-0 bottom-0 h-17 text-center"
+        className="z-10 mb-10 p-2.5 md:p-5 absolute inset-x-0 bottom-0 h-17 text-center"
       >
         <div className="inline-block px-4 pt-2.5 pb-2 md:px-8 md:pt-5 md:pb-3 bg-white">
           <h1
-            className={`${titleColor} text-xl md:text-4xl font-bold text-raleway`}
+            className={`${titleColor} uppercase text-xl md:text-4xl font-bold text-montserrat`}
           >
             {title}
           </h1>
           <span
-            className={`${subtitleColor} block text-xs md:text-xl text-oswald`}
+            className={`${subtitleColor} uppercase block text-xs md:text-xl text-montserrat`}
           >
             {subtitle}
           </span>

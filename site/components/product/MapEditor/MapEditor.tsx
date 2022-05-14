@@ -1,7 +1,9 @@
 import { FC, useEffect } from 'react'
 import { TiCompass, TiBrush } from 'react-icons/ti';
 import { RiInputMethodLine, RiDragDropFill } from 'react-icons/ri';
+import { HiHome, HiLocationMarker } from 'react-icons/hi';
 import { HeartIcon, LocationMarkerIcon } from '@heroicons/react/solid'
+import { ImAirplane } from 'react-icons/im';
 import type { Product } from '@commerce/types/product'
 import { ProductOptions } from '@components/product'
 import usePrice from '@framework/product/use-price'
@@ -297,9 +299,9 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [title, setTitle] = useState('New York')
   const [subtitle, setSubtitle] = useState('United States')
   const [status, setStatus] = useState('')
-  const [mapStyle, setMapStyle] = useState('cjria9ya35nzu2smgxatsz5fp')
+  const [mapStyle, setMapStyle] = useState('cl2nobx08001h14qotlg1madp')
   const [frame, setFrameStyle] = useState(0)
-  const [layoutStyle, setLayoutStyle] = useState('')
+  const [layoutStyle, setLayoutStyle] = useState('classic')
   const [titleColor, setTitleColor] = useState('')
   const [subtitleColor, setSubtitleColor] = useState('')
   const [gradientBackgroundColor, setGradientBackgroundColor] = useState(
@@ -431,7 +433,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                 <h1 className="text-3xl font font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                   {product.name}
                 </h1>
-                <p className="text-xl font font-extrabold tracking-tight text-gray-900 sm:text-xl">{price}</p>
+                <p className="text-xl font text-gray-500 sm:text-xl">{price}</p>
               </div>
               {/* Reviews */}
               <div className="mt-4">
@@ -714,7 +716,25 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           type="button"
                           className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
-                          <HeartIcon
+                          <HiHome
+                            className="h-6 w-6 text-red"
+                            aria-hidden="true"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          className=" inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
+                        >
+                          <HiLocationMarker
+                            className="h-6 w-6 text-red"
+                            aria-hidden="true"
+                          />
+                        </button>
+                        <button
+                          type="button"
+                          className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
+                        >
+                          <ImAirplane
                             className="h-6 w-6 text-red"
                             aria-hidden="true"
                           />
