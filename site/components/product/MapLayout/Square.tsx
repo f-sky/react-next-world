@@ -10,7 +10,7 @@ const Square = ({
   return (
     <>
       <div
-        className="z-20 p-2.5 md:p-5 absolute inset-x-0 bottom-0 h-17 text-center bg-white"
+        className="pointer-events-none z-20 p-2.5 md:p-5 absolute inset-x-0 bottom-0 h-17 text-center bg-white"
       >
         <span
           className={`${titleColor} text-base md:text-2xl xl:text-4xl font-bold text-raleway`}
