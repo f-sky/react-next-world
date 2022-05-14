@@ -27,25 +27,28 @@ const Quantity: FC<QuantityProps> = ({
       </button>
  */}
 
-<p>Qty</p>
 
-<div className="flex flex-row">
-<button
-        type="button"
-        onClick={decrease}
-        className="border-0"
-        //style={{ marginLeft: '-1px' }}
-        disabled={value <= 1}
-      >
-        <Minus width={18} height={18} />
-      </button>
+
+      <div className="flex flex-row items-center">
+      <p className="mr-3">Qty</p>
+
+        <div className="flex items-center">
+        <button
+          type="button"
+          onClick={decrease}
+          className="border-0"
+          //style={{ marginLeft: '-1px' }}
+          disabled={value <= 1}
+        >
+          <Minus width={14} height={14} />
+        </button>
 
 
         <input
           onChange={(e) =>
             Number(e.target.value) < max + 1 ? handleChange(e) : () => {}
           }
-          className="border-0 ml-2 focus:outline-none "
+          className="border-0 ml-4 focus:outline-none focus:ring-0 "
           value={value}
           type="number"
           max={max}
@@ -53,22 +56,22 @@ const Quantity: FC<QuantityProps> = ({
           readOnly
         />
 
-<button
-        type="button"
-        onClick={increase}
-        className="border-0"
-        //style={{ marginLeft: '-1px' }}
-        disabled={value < 1 || value >= max}
-      >
-        <Plus width={18} height={18} />
+        <button
+          type="button"
+          onClick={increase}
+          className="border-0"
+          //style={{ marginLeft: '-1px' }}
+          disabled={value < 1 || value >= max}
+        >
+          <Plus width={14} height={14} />
+        </button>
+
+        </div>
+      </div>
+
+      <button onClick={handleRemove} className="hover:cursor-pointer">
+        Remove
       </button>
-</div>
-
-{/* 
-
-
- */}
-      <span onClick={handleRemove} className="hover:cursor-pointer">Remove</span>
     </div>
   )
 }

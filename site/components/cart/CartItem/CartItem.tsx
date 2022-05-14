@@ -124,13 +124,13 @@ const CartItem = ({
                     <span className="font-semibold">{option.name}:</span>
                     {option.name === 'Color' ? (
                       <span
-                        className="bg-transparent  w-5 h-auto p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden"
+                        className="w-5 h-auto p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden"
                         style={{
                           backgroundColor: `${option.value}`,
                         }}
                       ></span>
                     ) : (
-                      <span className=" bg-transparent  h-auto p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden">
+                      <span className="h-auto p-1 text-accent-9 inline-flex items-center justify-center overflow-hidden">
                         {option.value}
                       </span>
                     )}
