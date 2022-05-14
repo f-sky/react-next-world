@@ -433,7 +433,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                 <h1 className="text-3xl font font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                   {product.name}
                 </h1>
-                <p className="text-xl font text-gray-500 sm:text-xl">{price}</p>
+                <p className="text-xl pt-2 font text-gray-400 sm:text-xl">{price}</p>
               </div>
               {/* Reviews */}
               <div className="mt-4">
@@ -632,7 +632,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                         <AutoComplete
                           // className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                           // style={{ background: 'red' }}
-                          className="w-full p-2 border-2 border-gray-300 rounded-none rounded-r-md"
+                          className="w-full p-2 border-2 border-gray-200"
                           apiKey={'AIzaSyDUc5Y4hdG1FvoJVP7aNhSni4rIoLd_ca0'}
                           onPlaceSelected={(place: any) => {
                             try {
@@ -922,7 +922,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       </div>
                       <div className="my-7">
                         <h2 className="text-sm font-medium text-gray-900">
-                          Big Text
+                          Top Text
                         </h2>
                         <input
                           type="text"
@@ -934,7 +934,20 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       </div>
                       <div className="my-7">
                         <h2 className="text-sm font-medium text-gray-900">
-                          Small Text
+                          Middle Text
+                        </h2>
+                        <input
+                          type="text"
+                          name="subtitle"
+                          id="subtitle"
+                          className="focus:ring-sky-500 focus:border-sky-500 flex-grow block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          onChange={(ev) => setSubtitle(ev.target.value)}
+                          defaultValue={subtitle}
+                        />
+                      </div>
+                      <div className="my-7">
+                        <h2 className="text-sm font-medium text-gray-900">
+                          Bottom Text
                         </h2>
                         <input
                           type="text"
