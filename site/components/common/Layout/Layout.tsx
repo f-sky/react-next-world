@@ -547,55 +547,55 @@ const Layout: React.FC<Props> = ({
                       <div className="mt-28 md:mt-10 absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
                         <div className="flex items-center space-x-6 lg:space-x-8">
                           <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
-                            <div className="w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100">
+                            <div className="h-64 sm:opacity-0 lg:opacity-100">
                               <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                                src="/assets/frame-1.png"
                                 alt=""
                                 className="w-full h-full object-center object-cover"
                               />
                             </div>
-                            <div className="w-44 h-64 rounded-lg overflow-hidden">
+                            <div className="h-64">
                               <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                                alt=""
-                                className="w-full h-full object-center object-cover"
-                              />
-                            </div>
-                          </div>
-                          <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
-                            <div className="w-44 h-64 rounded-lg overflow-hidden">
-                              <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
-                                alt=""
-                                className="w-full h-full object-center object-cover"
-                              />
-                            </div>
-                            <div className="w-44 h-64 rounded-lg overflow-hidden">
-                              <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
-                                alt=""
-                                className="w-full h-full object-center object-cover"
-                              />
-                            </div>
-                            <div className="w-44 h-64 rounded-lg overflow-hidden">
-                              <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                                src="/assets/frame-1.png"
                                 alt=""
                                 className="w-full h-full object-center object-cover"
                               />
                             </div>
                           </div>
                           <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
-                            <div className="w-44 h-64 rounded-lg overflow-hidden">
+                            <div className="h-64">
                               <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                                src="/assets/frame-1.png"
                                 alt=""
                                 className="w-full h-full object-center object-cover"
                               />
                             </div>
-                            <div className="w-44 h-64 rounded-lg overflow-hidden">
+                            <div className="h-64">
                               <img
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                                src="/assets/frame-1.png"
+                                alt=""
+                                className="w-full h-full object-center object-cover"
+                              />
+                            </div>
+                            <div className="h-64">
+                              <img
+                                src="/assets/frame-1.png"
+                                alt=""
+                                className="w-full h-full object-center object-cover"
+                              />
+                            </div>
+                          </div>
+                          <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                            <div className="h-64">
+                              <img
+                                src="/assets/frame-1.png"
+                                alt=""
+                                className="w-full h-full object-center object-cover"
+                              />
+                            </div>
+                            <div className="h-64">
+                              <img
+                                src="/assets/frame-1.png"
                                 alt=""
                                 className="w-full h-full object-center object-cover"
                               />
