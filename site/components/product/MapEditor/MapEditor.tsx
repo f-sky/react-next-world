@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react'
-import { TiCompass, TiBrush } from 'react-icons/ti';
-import { RiInputMethodLine, RiDragDropFill } from 'react-icons/ri';
-import { HiHome, HiLocationMarker } from 'react-icons/hi';
+import { TiCompass, TiBrush } from 'react-icons/ti'
+import { RiInputMethodLine, RiDragDropFill } from 'react-icons/ri'
+import { HiHome, HiLocationMarker } from 'react-icons/hi'
 import { HeartIcon, LocationMarkerIcon } from '@heroicons/react/solid'
-import { ImAirplane } from 'react-icons/im';
+import { ImAirplane } from 'react-icons/im'
 import type { Product } from '@commerce/types/product'
 import { ProductOptions } from '@components/product'
 import usePrice from '@framework/product/use-price'
@@ -21,7 +21,7 @@ import {
   PhotographIcon,
   ViewListIcon,
 } from '@heroicons/react/outline'
-
+import domtoimage from 'dom-to-image'
 import AutoComplete from 'react-google-autocomplete'
 
 import { ChevronDownIcon } from '@heroicons/react/solid'
@@ -35,19 +35,37 @@ import {
   SelectedOptions,
 } from '../helpers'
 
+const reviews = [
+  {
+    id: 1,
+    title: "Mom loved it",
+    rating: 5,
+    content: `
+      <p>Mom really loved the map and the whole ordering experience was easy! Definitely recommend</p>
+    `,
+    author: 'Ashley M',
+    date: 'May 6, 2021',
+    datetime: '2022-01-06',
+  },
+  // More reviews...
+]
+
 const features2 = [
   {
     name: 'Minimal and thoughtful',
     description:
       'Our laptop sleeve is compact and precisely fits 13" devices. The zipper allows you to access the interior with ease, and the front pouch provides a convenient place for your charger cable.',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-01.jpg',
-    imageAlt: 'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-01.jpg',
+    imageAlt:
+      'White canvas laptop sleeve with gray felt interior, silver zipper, and tan leather zipper pull.',
   },
   {
     name: 'Refined details',
     description:
       'We design every detail with the best materials and finishes. This laptop sleeve features durable canvas with double-stitched construction, a felt interior, and a high quality zipper that hold up to daily use.',
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-02.jpg',
+    imageSrc:
+      'https://tailwindui.com/img/ecommerce-images/product-feature-07-detail-02.jpg',
     imageAlt: 'Detail of zipper pull with tan leather and silver rivet.',
   },
 ]
@@ -56,25 +74,22 @@ const features = [
   {
     name: 'Design Your Own Personalized Map Poster',
     description:
-      'Today, Next, and Someday cards allow you to defer your dreams into the future.',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-01.jpg',
+      'Make your home more you with unique prints and products that truly express who you are. Great art tells a story, and we’re sure that you have some amazing stories to share with the world.',
+    imageSrc: '/assets/map-demo.gif',
     imageAlt: 'Green cardstock box containing white, beige, and brown cards.',
   },
   {
-    name: 'Printed Locally & Shipped',
+    name: 'Printed Locally & Shipped To You',
     description:
-      'Each refill pack contains plenty of cards to last you a month of procrastination.',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-02.jpg',
+      "To bring down the time it takes for delivery we've partnered with printing companies around the world to ensure you get the best experience.",
+    imageSrc: '/assets/feature-4.png',
     imageAlt: 'Green cardstock box open with 50 cards inside.',
   },
   {
     name: 'Hang & Enjoy!',
     description:
-      'Flip a card over to doodle during meetings when you should be listening.',
-    imageSrc:
-      'https://tailwindui.com/img/ecommerce-images/product-feature-08-detail-03.jpg',
+      "Nothing beats a new piece of art, at least we think so. If you're not 100% satisfied let us know and we'll make it right.",
+    imageSrc: '/assets/feature-2.png',
     imageAlt:
       'Detail of white today card, beige next card, and brown someday card with dot grid.',
   },
@@ -320,12 +335,39 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
 
   const variant = getProductVariant(product, selectedOptions)
   const addToCart = async () => {
+    let node = document.getElementById('editor-wrapper')
+    let controls = document.getElementsByClassName('leaflet-control-container')
+
     setLoading(true)
+
     try {
       await addItem({
         productId: String(product.id),
         variantId: String(variant ? variant.id : product.variants[0]?.id),
       })
+
+      controls[0].classList.add('hide')
+
+      // Generate image and upload to storage
+      domtoimage
+        .toPng(node, { quality: 1 })
+        .then((dataUrl: any) => {
+          let img = new Image()
+          img.src = dataUrl
+          console.log(dataUrl, 'image')
+
+          let link = document.createElement('a')
+          link.download = 'map.png'
+          link.href = dataUrl
+          link.click()
+
+          controls[0].classList.remove('hide')
+        })
+        .catch((error: any) => {
+          console.error('oops, something went wrong!', error)
+          controls[0].classList.remove('hide')
+        })
+
       openSidebar()
       setLoading(false)
     } catch (err) {
@@ -384,7 +426,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
 
   return (
     <div className="bg-white">
-      <div className="pt-6 pb-16 sm:pb-2">
+      <div className="pt-6 pb-4 sm:pb-2">
         {/* <nav
           aria-label="Breadcrumb"
           className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
@@ -426,7 +468,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
         </nav> */}
         <div
           id="art-frame"
-          className="max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+          className="md:py-10 max-w-2xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <div className="lg:grid lg:grid-cols-12 lg:auto-rows-min lg:gap-x-8">
             <div className="lg:col-start-8 lg:col-span-5">
@@ -434,7 +476,9 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                 <h1 className="text-3xl font font-extrabold tracking-tight text-gray-900 sm:text-3xl">
                   {product.name}
                 </h1>
-                <p className="text-xl pt-2 font text-gray-400 sm:text-xl">{price}</p>
+                <p className="text-xl pt-2 font text-gray-400 sm:text-xl">
+                  {price}
+                </p>
               </div>
               {/* Reviews */}
               <div className="mt-4">
@@ -477,12 +521,15 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
             </div>
 
             {/* Image gallery */}
-            <div className="mt-4 md:mt-8 lg:mt-0 lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-3">
+            <div className="py-10 md:py-0 mt-4 md:mt-8 lg:mt-0 lg:col-start-1 lg:col-span-7 lg:row-start-1 lg:row-span-3">
               <h2 className="sr-only">Images</h2>
 
               <div>
-                <div className="editor py-4 md:pt-0 md:pb-10">
-                  <div className="editor-wrapper aspect-[18/24] overflow-hidden relative">
+                <div className="editor">
+                  <div
+                    id="editor-wrapper"
+                    className="editor-wrapper aspect-[18/24] overflow-hidden relative"
+                  >
                     {/* change frame with border colors here */}
                     {isMarkerEnabled && (
                       <div className="marker-overlay absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
@@ -505,7 +552,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       title={title}
                       subtitle={subtitle}
                       width="354.5px"
-                      height="1000px"
+                      height="100%"
                       lng={lng}
                       lat={lat}
                       mapStyle={mapStyle}
@@ -901,35 +948,36 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       </div>
 
                       <div className="mt-2 relative flex items-start">
-                          <div className="flex items-center h-5">
-                            <input
-                              id="map-labels"
-                              aria-describedby="comments-description"
-                              name="comments"
-                              type="checkbox"
-                              // checked={false}
-                              onChange={(ev) =>
-                                // setMarkerEnabled(!isMarkerEnabled)
-                                console.log('test')
-                              }
-                              className="focus:ring-gray-500 h-4 w-4 text-black border-gray-300 rounded"
-                            />
-                          </div>
-                          <div className="ml-3 text-sm">
-                            <label
-                              htmlFor="map-labels"
-                              className="font-medium text-gray-700"
-                            >
-                              Turn on Map Labels
-                            </label>
-                            <span
-                              className="text-gray-500"
-                            >
-                              <span className="sr-only">  Turn on Map Labels </span> -
-                              show street, city, and other labels
-                            </span>
-                          </div>
+                        <div className="flex items-center h-5">
+                          <input
+                            id="map-labels"
+                            aria-describedby="comments-description"
+                            name="comments"
+                            type="checkbox"
+                            // checked={false}
+                            onChange={(ev) =>
+                              // setMarkerEnabled(!isMarkerEnabled)
+                              console.log('test')
+                            }
+                            className="focus:ring-gray-500 h-4 w-4 text-black border-gray-300 rounded"
+                          />
                         </div>
+                        <div className="ml-3 text-sm">
+                          <label
+                            htmlFor="map-labels"
+                            className="font-medium text-gray-700"
+                          >
+                            Turn on Map Labels
+                          </label>
+                          <span className="text-gray-500">
+                            <span className="sr-only">
+                              {' '}
+                              Turn on Map Labels{' '}
+                            </span>{' '}
+                            - show street, city, and other labels
+                          </span>
+                        </div>
+                      </div>
                     </div>
                     {/* {faqs.map((faq) => (
                     <Fragment key={faq.question}>
@@ -1088,6 +1136,9 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       ? 'Not Available'
                       : 'Add To Cart'}
                   </Button>
+                  <small className="block text-center my-5">
+                    100% Satisfaction Guaranteed
+                  </small>
                   {/* <button
                   type="submit"
                   className="mt-8 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 z-0"
@@ -1098,7 +1149,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
               </form>
 
               {/* productData details */}
-              <div className="mt-10">
+              {/* <div className="mt-10">
                 <h2 className="text-sm font-medium text-gray-900">
                   Description
                 </h2>
@@ -1107,7 +1158,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                   className="mt-4 prose prose-sm text-gray-500"
                   dangerouslySetInnerHTML={{ __html: product.description }}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -1126,7 +1177,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
             </p> */}
           </div>
 
-          <div className="mt-11 grid items-start grid-cols-1 gap-y-16 gap-x-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+          <div className="mt-11 grid items-start grid-cols-1 gap-y-16 gap-x-6 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-8">
             {features.map((feature) => (
               <div key={feature.name} className="flex flex-col-reverse">
                 <div className="mt-6">
@@ -1150,7 +1201,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
         </div>
       </div>
 
-      <div className="bg-white">
+      {/* <div className="bg-white">
         <div className="max-w-2xl mx-auto py-24 px-4 sm:px-6 sm:py-32 lg:max-w-7xl lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -1204,7 +1255,147 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
             ))}
           </div>
         </div>
+      </div> */}
+
+      <div className="bg-white">
+        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h2 className="text-lg font-medium text-gray-900">Recent reviews</h2>
+          <div className="mt-6 pb-10 border-t border-b border-gray-200 divide-y divide-gray-200 space-y-10">
+            {reviews.map((review) => (
+              <div
+                key={review.id}
+                className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8"
+              >
+                <div className="lg:col-start-5 lg:col-span-8 xl:col-start-4 xl:col-span-9 xl:grid xl:grid-cols-3 xl:gap-x-8 xl:items-start">
+                  <div className="flex items-center xl:col-span-1">
+                    <div className="flex items-center">
+                      {[0, 1, 2, 3, 4].map((rating) => (
+                        <StarIcon
+                          key={rating}
+                          className={classNames(
+                            review.rating > rating
+                              ? 'text-yellow-400'
+                              : 'text-gray-200',
+                            'h-5 w-5 flex-shrink-0'
+                          )}
+                          aria-hidden="true"
+                        />
+                      ))}
+                    </div>
+                    <p className="ml-3 text-sm text-gray-700">
+                      {review.rating}
+                      <span className="sr-only"> out of 5 stars</span>
+                    </p>
+                  </div>
+
+                  <div className="mt-4 lg:mt-6 xl:mt-0 xl:col-span-2">
+                    <h3 className="text-sm font-medium text-gray-900">
+                      {review.title}
+                    </h3>
+
+                    <div
+                      className="mt-3 space-y-6 text-sm text-gray-500"
+                      dangerouslySetInnerHTML={{ __html: review.content }}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 flex items-center text-sm lg:mt-0 lg:col-start-1 lg:col-span-4 lg:row-start-1 lg:flex-col lg:items-start xl:col-span-3">
+                  <p className="font-medium text-gray-900">{review.author}</p>
+                  <time
+                    dateTime={review.datetime}
+                    className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
+                  >
+                    {review.date}
+                  </time>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+
+      <div className="bg-white">
+      <div className="pt-32 overflow-hidden sm:pt-14">
+        <div className="bg-gray-800">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative pt-48 pb-16 sm:pb-24">
+              <div>
+                <h2 id="sale-heading" className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
+                  Get 2nd Poster
+                  <br />
+                  Up to 25% off.
+                </h2>
+                <div className="mt-6 text-base">
+                  <a href="#" className="font-semibold text-white">
+                    Shop the sale<span aria-hidden="true"> &rarr;</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 sm:top-6 sm:translate-x-0">
+                <div className="ml-24 flex space-x-6 min-w-max sm:ml-3 lg:space-x-8">
+                  <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="mt-6 flex-shrink-0 sm:mt-0">
+                      <img
+                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="mt-6 flex-shrink-0 sm:mt-0">
+                      <img
+                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+                    <div className="flex-shrink-0">
+                      <img
+                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                        alt=""
+                      />
+                    </div>
+
+                    <div className="mt-6 flex-shrink-0 sm:mt-0">
+                      <img
+                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     </div>
   )
 }
