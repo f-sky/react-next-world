@@ -387,7 +387,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
           ssr: false, // This line is important. It's what prevents server-side render
         }
       ),
-    [lat, mapStyle, frame, layoutStyle] // state that should refresh the map
+    [lat, mapStyle, frame, layoutStyle, markerColor] // state that should refresh the map
   )
 
   const getUserLocation = () => {
