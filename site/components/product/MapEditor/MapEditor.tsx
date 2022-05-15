@@ -22,6 +22,7 @@ import {
   PhotographIcon,
   ViewListIcon,
 } from '@heroicons/react/outline'
+import { SwatchesPicker } from 'react-color'
 import domtoimage from 'dom-to-image'
 import AutoComplete from 'react-google-autocomplete'
 
@@ -39,7 +40,7 @@ import {
 const reviews = [
   {
     id: 1,
-    title: "Mom loved it",
+    title: 'Mom loved it',
     rating: 5,
     content: `
       <p>Mom really loved the map and the whole ordering experience was easy! Definitely recommend</p>
@@ -336,7 +337,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
 
   const variant = getProductVariant(product, selectedOptions)
   const addToCart = async () => {
-    let node = document.getElementById('editor-wrapper');
+    let node = document.getElementById('editor-wrapper')
     let controls = document.getElementsByClassName('leaflet-control-container')
 
     setLoading(true)
@@ -414,6 +415,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   )
 
   const [placesError, setPlacesError] = useState('')
+  const [isColorPickerOpen, setColorPickerOpen] = useState(false)
+  const [markerColor, setMarkerColor] = useState('');
 
   const { price } = usePrice({
     amount: product.price.value,
@@ -538,7 +541,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-8 w-8 text-red"
                           viewBox="0 0 20 20"
-                          fill="currentColor"
+                          fill={markerColor}
                         >
                           <path
                             fillRule="evenodd"
@@ -757,7 +760,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <HeartIcon
-                            className="h-6 w-6 text-red"
+                            style={{color: markerColor || 'red'}}
+                            className="h-6 w-6"
                             aria-hidden="true"
                           />
                         </button>
@@ -766,7 +770,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <HiHome
-                            className="h-6 w-6 text-red"
+                            style={{color: markerColor || 'red'}}
+                            className="h-6 w-6"
                             aria-hidden="true"
                           />
                         </button>
@@ -775,7 +780,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className=" inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <HiLocationMarker
-                            className="h-6 w-6 text-red"
+                            style={{color: markerColor || 'red'}}
+                            className="h-6 w-6"
                             aria-hidden="true"
                           />
                         </button>
@@ -784,10 +790,25 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <ImAirplane
-                            className="h-6 w-6 text-red"
+                            style={{color: markerColor || 'red'}}
+                            className="h-6 w-6"
                             aria-hidden="true"
                           />
                         </button>
+                        <button
+                          type="button"
+                          style={{ background: markerColor }}
+                          onClick={() => setColorPickerOpen(!isColorPickerOpen)}
+                          className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
+                        ></button>
+                        {isColorPickerOpen && (
+                          <SwatchesPicker
+                            onChangeComplete={(color, ev) => {
+                              setMarkerColor(color.hex)
+                              setColorPickerOpen(false);
+                            }}
+                          />
+                        )}
                       </div>
                     </div>
                   </Tab.Panel>
@@ -1316,76 +1337,79 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
         </div>
       </div>
 
-
       <div className="bg-white">
-      <div className="pt-32 overflow-hidden sm:pt-14">
-        <div className="bg-gray-800">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="relative pt-48 pb-16 sm:pb-24">
-              <div>
-                <h2 id="sale-heading" className="text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-                  Get 2nd Poster
-                  <br />
-                  Up to 25% off.
-                </h2>
-                <div className="mt-6 text-base">
-                  <a href="#" className="font-semibold text-white">
-                    Shop the sale<span aria-hidden="true"> &rarr;</span>
-                  </a>
+        <div className="pt-32 overflow-hidden sm:pt-14">
+          <div className="bg-gray-800">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="relative pt-48 pb-16 sm:pb-24">
+                <div>
+                  <h2
+                    id="sale-heading"
+                    className="text-4xl font-extrabold tracking-tight text-white md:text-5xl"
+                  >
+                    Get 2nd Poster
+                    <br />
+                    Up to 25% off.
+                  </h2>
+                  <div className="mt-6 text-base">
+                    <a href="#" className="font-semibold text-white">
+                      Shop the sale<span aria-hidden="true"> &rarr;</span>
+                    </a>
+                  </div>
                 </div>
-              </div>
 
-              <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 sm:top-6 sm:translate-x-0">
-                <div className="ml-24 flex space-x-6 min-w-max sm:ml-3 lg:space-x-8">
-                  <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
-                        alt=""
-                      />
-                    </div>
+                <div className="absolute -top-32 left-1/2 transform -translate-x-1/2 sm:top-6 sm:translate-x-0">
+                  <div className="ml-24 flex space-x-6 min-w-max sm:ml-3 lg:space-x-8">
+                    <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                          alt=""
+                        />
+                      </div>
 
-                    <div className="mt-6 flex-shrink-0 sm:mt-0">
-                      <img
-                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
-                        alt=""
-                      />
+                      <div className="mt-6 flex-shrink-0 sm:mt-0">
+                        <img
+                          className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                          alt=""
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
-                        alt=""
-                      />
-                    </div>
+                    <div className="flex space-x-6 sm:-mt-20 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-01.jpg"
+                          alt=""
+                        />
+                      </div>
 
-                    <div className="mt-6 flex-shrink-0 sm:mt-0">
-                      <img
-                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
-                        alt=""
-                      />
+                      <div className="mt-6 flex-shrink-0 sm:mt-0">
+                        <img
+                          className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-favorite-02.jpg"
+                          alt=""
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
-                    <div className="flex-shrink-0">
-                      <img
-                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
-                        alt=""
-                      />
-                    </div>
+                    <div className="flex space-x-6 sm:flex-col sm:space-x-0 sm:space-y-6 lg:space-y-8">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-01.jpg"
+                          alt=""
+                        />
+                      </div>
 
-                    <div className="mt-6 flex-shrink-0 sm:mt-0">
-                      <img
-                        className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
-                        src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
-                        alt=""
-                      />
+                      <div className="mt-6 flex-shrink-0 sm:mt-0">
+                        <img
+                          className="h-64 w-64 rounded-lg object-cover md:h-72 md:w-72"
+                          src="https://tailwindui.com/img/ecommerce-images/home-page-03-category-02.jpg"
+                          alt=""
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1394,9 +1418,6 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
           </div>
         </div>
       </div>
-    </div>
-
-
     </div>
   )
 }
