@@ -29,7 +29,7 @@ const Quantity: FC<QuantityProps> = ({
 
 
 
-      <div className="flex flex-row items-center">
+      {/* <div className="flex flex-row items-center">
       <p className="mr-3">Qty</p>
 
         <div className="flex items-center">
@@ -67,7 +67,7 @@ const Quantity: FC<QuantityProps> = ({
         </button>
 
         </div>
-      </div>
+      </div> */}
 
       <button onClick={handleRemove} className="hover:cursor-pointer">
         Remove

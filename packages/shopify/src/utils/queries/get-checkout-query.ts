@@ -17,6 +17,7 @@ export const checkoutDetailsFragment = /* GraphQL */ `
     completedAt
     createdAt
     taxesIncluded
+    note
     lineItems(first: 250) {
       pageInfo {
         hasNextPage

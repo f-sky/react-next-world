@@ -1,25 +1,25 @@
 {
-  "title": "ACME Storefront | Powered by Next.js Commerce",
-  "titleTemplate": "%s - ACME Storefront",
-  "description": "Next.js Commerce - https://www.nextjs.org/commerce",
+  "title": "Create Personalized Gifts - NextWorld",
+  "titleTemplate": "%s - NextWorld",
+  "description": "Turn your memories into personalized gifts. Customize the text and design get an art print that is 100% yours. Free Worldwide Shipping.",
   "openGraph": {
-    "title": "ACME Storefront | Powered by Next.js Commerce",
-    "description": "Next.js Commerce - https://www.nextjs.org/commerce",
+    "title": "Create Personalized Gifts - NextWorld",
+    "description": "Turn your memories into personalized gifts. Customize the text and design get an art print that is 100% yours. Free Worldwide Shipping.",
     "type": "website",
-    "url": "https://nextjs.org/commerce",
-    "site_name": "Next.js Commerce",
+    "url": "https://map-dev.vercel.app/",
+    "site_name": "Create Personalized Gifts - NextWorld",
     "images": [
       {
-        "url": "/card.png",
+        "url": "/preview.png",
         "width": "800",
         "height": "600",
-        "alt": "Next.js Commerce"
+        "alt": "Create Personalized Gifts - NextWorld"
       }
     ]
   },
   "twitter": {
-    "handle": "@nextjs",
-    "site": "@nextjs",
+    "handle": "@nextworldart",
+    "site": "@nextworldart",
     "cardType": "summary_large_image"
   }
 }

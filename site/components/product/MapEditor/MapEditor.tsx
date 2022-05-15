@@ -310,7 +310,11 @@ interface MapEditorProps {
 
 const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [center, setCenter] = useState([40.70345695121932, -74.00004777219424])
+
   const [isMarkerEnabled, setMarkerEnabled] = useState(true)
+  const [isColorPickerOpen, setColorPickerOpen] = useState(false)
+  const [markerColor, setMarkerColor] = useState('')
+
   const [lat, setLat] = useState(40.70345695121932)
   const [lng, setLng] = useState(-74.00004777219424)
   const [title, setTitle] = useState('New York')
@@ -343,37 +347,36 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
     setLoading(true)
 
     try {
-      await addItem({
-        productId: String(product.id),
-        variantId: String(variant ? variant.id : product.variants[0]?.id),
-      })
-
       controls[0].classList.add('hide')
 
       // Generate image and upload to storage
-      domtoimage
-        .toPng(node, { quality: 1 })
-        .then((dataUrl: any) => {
-          let img = new Image()
-          img.src = dataUrl
-          console.log(dataUrl, 'image')
+      let dataUrl = await domtoimage.toPng(node, { quality: 1 })
 
-          let link = document.createElement('a')
-          link.download = 'map.png'
-          link.href = dataUrl
-          link.click()
+      let response = await fetch('https://api.cloudinary.com/v1_1/demo/image/upload', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          file: dataUrl,
+          api_key: '486886977612567',
+          upload_preset: 'm12efc7j'
+        })
+      })
 
-          controls[0].classList.remove('hide')
-        })
-        .catch((error: any) => {
-          console.error('oops, something went wrong!', error)
-          controls[0].classList.remove('hide')
-        })
+      let data = await response.json()
+
+      await addItem({
+        productId: String(product.id),
+        variantId: String(variant ? variant.id : product.variants[0]?.id),
+        note: data.url,
+      })
 
       openSidebar()
       setLoading(false)
     } catch (err) {
       console.log(err)
+      controls[0].classList.remove('hide')
       setLoading(false)
     }
   }
@@ -415,8 +418,6 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   )
 
   const [placesError, setPlacesError] = useState('')
-  const [isColorPickerOpen, setColorPickerOpen] = useState(false)
-  const [markerColor, setMarkerColor] = useState('');
 
   const { price } = usePrice({
     amount: product.price.value,
@@ -427,6 +428,8 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const onMove = (coords: any, zoom: any) => {
     setCenter([coords.lat, coords.lng])
   }
+
+  console.log(product, 'product')
 
   return (
     <div className="bg-white">
@@ -760,7 +763,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <HeartIcon
-                            style={{color: markerColor || 'red'}}
+                            style={{ color: markerColor || 'red' }}
                             className="h-6 w-6"
                             aria-hidden="true"
                           />
@@ -770,7 +773,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <HiHome
-                            style={{color: markerColor || 'red'}}
+                            style={{ color: markerColor || 'red' }}
                             className="h-6 w-6"
                             aria-hidden="true"
                           />
@@ -780,7 +783,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className=" inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <HiLocationMarker
-                            style={{color: markerColor || 'red'}}
+                            style={{ color: markerColor || 'red' }}
                             className="h-6 w-6"
                             aria-hidden="true"
                           />
@@ -790,7 +793,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           className="mx-4 inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 ring-2 ring-gray-200"
                         >
                           <ImAirplane
-                            style={{color: markerColor || 'red'}}
+                            style={{ color: markerColor || 'red' }}
                             className="h-6 w-6"
                             aria-hidden="true"
                           />
@@ -805,7 +808,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                           <SwatchesPicker
                             onChangeComplete={(color, ev) => {
                               setMarkerColor(color.hex)
-                              setColorPickerOpen(false);
+                              setColorPickerOpen(false)
                             }}
                           />
                         )}

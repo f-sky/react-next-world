@@ -33,6 +33,7 @@
     "@vercel/commerce-vendure": "^0.0.1",
     "autoprefixer": "^10.4.2",
     "body-scroll-lock": "^4.0.0-beta.0",
+    "cloudinary": "^1.30.0",
     "clsx": "^1.1.1",
     "dom-to-image": "^2.6.0",
     "email-validator": "^2.0.4",

@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { useCallback } from 'react'
 import type { MutationHook } from '@vercel/commerce/utils/types'
 import { CommerceError } from '@vercel/commerce/utils/errors'
@@ -38,8 +39,8 @@ export const handler: MutationHook<AddItemHook> = {
 
     let checkoutId = getCheckoutId()
 
-    if (!checkoutId) {
-      return checkoutToCart(await checkoutCreate(fetch, lineItems))
+    if (!checkoutId) { 
+      return checkoutToCart(await checkoutCreate(fetch, lineItems, item.note))
     } else {
       const { checkoutLineItemsAdd } = await fetch<
         Mutation,
@@ -49,6 +50,7 @@ export const handler: MutationHook<AddItemHook> = {
         variables: {
           checkoutId,
           lineItems,
+          note: item.note,
         },
       })
       return checkoutToCart(checkoutLineItemsAdd)
