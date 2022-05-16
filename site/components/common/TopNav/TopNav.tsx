@@ -7,10 +7,12 @@ import {
   ShoppingBagIcon,
   XIcon,
 } from '@heroicons/react/outline'
+import { Button } from '@components/ui'
+import { Bag } from '@components/icons'
+import s from './TopNav.module.css'
 
 import cn from 'clsx'
 import Link from 'next/link'
-import s from './UserNav.module.css'
 import useCart from '@framework/cart/use-cart'
 import { useUI } from '@components/ui/context'
 import useCustomer from '@framework/customer/use-customer'
@@ -167,8 +169,9 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'Our Story', href: '#' },
+    // { name: 'Our Story', href: '#' },
     { name: 'Inspiration', href: '#' },
+    { name: 'Contact', href: '#' },
   ],
 }
 
@@ -273,7 +276,7 @@ const Nav: FC<NavProps> = ({ links }) => {
             <a href="/">
               <span className="sr-only">NextWorld</span>
               <img
-                style={{width:'150px'}}
+                style={{ width: '150px' }}
                 className="h-5"
                 src="/assets/nextworldlogo.png"
                 alt=""
@@ -453,18 +456,19 @@ const Nav: FC<NavProps> = ({ links }) => {
  */}
             {/* Cart */}
             <div className="ml-4 flow-root lg:ml-6">
-              <a href="/cart" className="group -m-2 p-2 flex items-center">
-                <ShoppingBagIcon
-                  className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                  aria-hidden="true"
-                />
+              <Button
+                className={s.item}
+                variant="naked"
+                onClick={() => {
+                  setSidebarView('CART_VIEW')
+                  toggleSidebar()
+                }}
+              >
+                <Bag />
                 {itemsCount > 0 && (
-                  <span className="ml-2 text-md pt-1 text-montserrat font-medium text-gray-700 group-hover:text-gray-800">
-                    {itemsCount}
-                  </span>
+                  <span className={s.bagCount}>{itemsCount}</span>
                 )}
-                <span className="sr-only">items in cart, view bag</span>
-              </a>
+              </Button>
             </div>
           </div>
         </div>
