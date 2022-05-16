@@ -272,7 +272,7 @@ const Nav: FC<NavProps> = ({ links }) => {
           </button>
 
           {/* Logo */}
-          <div className="ml-4 flex lg:ml-0">
+          <div className="ml-4 flex lg:ml-0 w-full md:w-auto justify-center">
             <a href="/">
               <span className="sr-only">NextWorld</span>
               <img
@@ -415,7 +415,7 @@ const Nav: FC<NavProps> = ({ links }) => {
           </Popover.Group>
 
           <div className="ml-auto flex items-center">
-            <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+            {/* <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
               <a
                 href="#"
                 className="text-sm font-medium text-gray-700 hover:text-gray-800"
@@ -429,7 +429,7 @@ const Nav: FC<NavProps> = ({ links }) => {
               >
                 Create account
               </a>
-            </div>
+            </div> */}
 
             {/* <div className="hidden lg:ml-8 lg:flex">
               <a
