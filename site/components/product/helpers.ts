@@ -30,3 +30,15 @@ export function selectDefaultOptionFromProduct(
     }))
   })
 }
+
+export function selectFirstSizeAvailableFromProduct(
+  product: Product,
+  updater: Dispatch<SetStateAction<SelectedOptions>>,
+  selectedTypeSizes: number[]
+) {
+  // Selects the first size option available
+  selectedTypeSizes.length > 0 && updater((choices) => ({
+    ...choices,
+    [product.options[0]?.displayName.toLowerCase()]: product.options[0]?.values[selectedTypeSizes[0]]?.label.toLowerCase(),
+  }))
+}

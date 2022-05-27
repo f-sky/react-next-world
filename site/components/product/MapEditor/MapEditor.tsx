@@ -1,12 +1,12 @@
 // @ts-nocheck
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useReducer } from 'react'
 import { TiCompass, TiBrush } from 'react-icons/ti'
 import { RiInputMethodLine, RiDragDropFill } from 'react-icons/ri'
 import { HiHome, HiLocationMarker } from 'react-icons/hi'
 import { HeartIcon, LocationMarkerIcon } from '@heroicons/react/solid'
 import { ImAirplane } from 'react-icons/im'
 import type { Product } from '@commerce/types/product'
-import { ProductOptions } from '@components/product'
+import { FormatOptions } from '@components/product'
 import usePrice from '@framework/product/use-price'
 
 import dynamic from 'next/dynamic'
@@ -30,11 +30,13 @@ import { ChevronDownIcon } from '@heroicons/react/solid'
 
 import s from '../ProductSidebar/ProductSidebar.module.css'
 import { useAddItem } from '@framework/cart'
+import useCart from '@framework/cart/use-cart'
 import { Button, useUI } from '@components/ui'
 import {
   getProductVariant,
   selectDefaultOptionFromProduct,
   SelectedOptions,
+  selectFirstSizeAvailableFromProduct,
 } from '../helpers'
 
 const reviews = [
@@ -239,12 +241,24 @@ const productData = {
       subtitleFont: 'text-homemade',
     },
   ],
-  sizes: [
-    { name: 'Small - 5in x 7in', inStock: true },
-    { name: 'Medium - 8in x 10in', inStock: true },
-    { name: 'Large - 16in x 20in ', inStock: true },
-    { name: 'X Large - 20in x 24in', inStock: true },
-  ],
+  prodcutTypes: {
+    id: 1,
+    displayName: 'Product Type',
+    values: [
+      {
+        label: 'Printed Poster',
+        sizeIds: [],
+      },
+      {
+        label: 'Framed Poster',
+        sizeIds: [],
+      },
+      {
+        label: 'Digital File',
+        sizeIds: [],
+      },
+    ]
+  },
   orientations: [{ name: 'Portait' }, { name: 'Landscape' }],
   description: `
     <p>The Basic tee is an honest new take on a classic. The tee uses super soft, pre-shrunk cotton for true comfort and a dependable fit. They are hand cut and sewn locally, with a special dye technique that gives each tee it's own look.</p>
@@ -308,6 +322,22 @@ interface MapEditorProps {
   // relatedProducts: Product[]
 }
 
+const productTypesReducer = (state, action) => {
+  let index;
+  switch (action.s.label.split('-')[0].trim().toLowerCase()) {
+    case "printed":
+      index = 0; break;
+    case "framed":
+      index = 1; break;
+    default:
+      index = 2; break;
+  }
+
+  if (state.values[index].sizeIds.indexOf(action.i) === -1)
+    state.values[index].sizeIds.push(action.i)
+  return state;
+};
+
 const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [center, setCenter] = useState([40.70345695121932, -74.00004777219424])
 
@@ -329,6 +359,9 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [gradientBackgroundColor, setGradientBackgroundColor] = useState(
     productData.layouts.classic.gradientBackgroundColor
   )
+  const [prodcutTypes, dispatchProductTypes] = useReducer(productTypesReducer, productData.prodcutTypes)
+  const [selectedProductType, setSelectedProductType] = useState(0)
+  const [selectedTypeSizes, setSelectedTypeSizes] = useState(prodcutTypes.values[0].sizeIds)
 
   const addItem = useAddItem()
   const { openSidebar } = useUI()
@@ -338,6 +371,18 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   useEffect(() => {
     selectDefaultOptionFromProduct(product, setSelectedOptions)
   }, [product])
+
+  useEffect(() => {
+    product.options[0].values.length && (
+      product.options[0].values.map((s, i:number) => {
+        dispatchProductTypes({s, i})
+      })
+    )
+  }, [])
+
+  useEffect(() => {
+    selectFirstSizeAvailableFromProduct(product, setSelectedOptions, selectedTypeSizes)
+  }, [selectedTypeSizes])
 
   const variant = getProductVariant(product, selectedOptions)
   const addToCart = async () => {
@@ -390,7 +435,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
           ssr: false, // This line is important. It's what prevents server-side render
         }
       ),
-    [lat, mapStyle, frame, layoutStyle, markerColor] // state that should refresh the map
+    [lat, mapStyle, frame, markerColor] // state that should refresh the map
   )
 
   const getUserLocation = () => {
@@ -412,7 +457,6 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   }
 
   const [selectedColor, setSelectedColor] = useState(productData.colors[0])
-  const [selectedSize, setSelectedSize] = useState(productData.sizes[0])
   const [selectOrientation, setSelectOrientation] = useState(
     productData.orientations[0]
   )
@@ -420,7 +464,7 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const [placesError, setPlacesError] = useState('')
 
   const { price } = usePrice({
-    amount: product.price.value,
+    amount: variant.price,
     baseAmount: product.price.retailPrice,
     currencyCode: product.price.currencyCode!,
   })
@@ -428,8 +472,6 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
   const onMove = (coords: any, zoom: any) => {
     setCenter([coords.lat, coords.lng])
   }
-
-  console.log(product, 'product')
 
   return (
     <div className="bg-white">
@@ -569,7 +611,6 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                       subtitleColor={subtitleColor}
                       gradientBackgroundColor={gradientBackgroundColor}
                       onMove={onMove}
-                      // onMove={onMove}
                       // eventually just pass in theme={theme} has all of the layouts
                     />
                   </div>
@@ -1072,10 +1113,15 @@ const MapEditor: FC<MapEditorProps> = ({ product }) => {
                   <Tab.Panel>
                     <h3 className="sr-only">Format</h3>
                     <div className="mt-4 prose prose-sm max-w-none text-gray-500">
-                      <ProductOptions
+                      <FormatOptions
                         options={product.options}
                         selectedOptions={selectedOptions}
                         setSelectedOptions={setSelectedOptions}
+                        prodcutTypes={prodcutTypes}
+                        selectedProductType={selectedProductType}
+                        setSelectedProductType={setSelectedProductType}
+                        selectedTypeSizes={selectedTypeSizes}
+                        setSelectedTypeSizes={setSelectedTypeSizes}
                       />
                     </div>
                   </Tab.Panel>
